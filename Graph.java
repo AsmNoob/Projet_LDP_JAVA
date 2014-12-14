@@ -43,4 +43,8 @@ public class Graph{
 			System.err.println("Caught IndexOutOfBoundsException in set_sommet(): " + e.getMessage());
 		}
 	}
+
+	public ArrayList<Node> get_listeSuccSommet(int index){
+		return liste_sommets_.get(index).get_listeSucc();
+	}
 }

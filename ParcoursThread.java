@@ -1,13 +1,20 @@
+import java.io.*;
+import java.util.*;
+import java.util.Random;
+
 public class ParcoursThread extends Thread{
 	
 	//Attributs
 	private Graph graph_;
+	private Node node_;
 
 	//Constructeurs
-	public ParcoursThread(Graph graph){
+	public ParcoursThread(Graph graph, Node node){
 		graph_ = graph;
+		node_ = node;
 		this.start();
 	}
+
 
 	public ParcoursThread(){
 		graph_ = new Graph();
@@ -15,6 +22,34 @@ public class ParcoursThread extends Thread{
 
 	//Méthodes 
 	public void run(){
+		// On mélange de manière aléatoire la liste des successeurs
+		Random randGen = new Random();
+		for(int i = 0; i < node_.get_sizeListeSucc();i++){
+			int randPos = randGen.nextInt(node_.get_sizeListeSucc());
+			Node noeud_temp = node_.get_sommetListeSucc(i);
+			node_.set_sommetListeSucc(i,node_.get_sommetListeSucc(randPos));
+			node_.set_sommetListeSucc(randPos,noeud_temp);
 
+		}
+		/*int Min = 0;
+		int Max = graph_.get_listeSommets().size()-1;
+		Random rand = new Random();
+		int nombreAleatoire = rand.nextInt(Max - Min + 1) + Min;
+		System.out.println(nombreAleatoire);*/
+
+		// Parcours des nodes 
+		for(int i = 0; i < node_.get_listeSucc().size();i++){
+			
+			if(node_.get_sommetListeSucc(i).get_visite()){
+				node_.get_sommetListeSucc(i).set_visite(true);
+				try {
+					int temps_aleatoire = (int) Math.random();
+			  		Thread.sleep(temps_aleatoire); // TODO time has to become aleatory
+				} catch (InterruptedException e) {
+					System.err.println("Caught InterruptedException in run(): " + e.getMessage());
+				}
+				ParcoursThread parcours = new ParcoursThread(graph_,node_.get_sommetListeSucc(i));
+			}
+		}
 	}
 }
