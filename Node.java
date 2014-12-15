@@ -4,8 +4,7 @@ import java.util.*;
 public class Node{
 	// Attributs
 	ArrayList<Node> liste_successeurs_;
-	int identificateur_; //
-	boolean visite_ = false;
+	final int identificateur_; //
 
 	// Constructeur
 	Node(int identificateur, ArrayList<Node> liste){
@@ -24,23 +23,19 @@ public class Node{
 	}
 
 	// Getters / Setters
-	public synchronized int get_identificateur(){
+	public int get_identificateur(){
 		return identificateur_;
 	}
 
-	public synchronized void set_identificateur(int new_id){
-		identificateur_ = new_id;
-	}
-
-	public synchronized ArrayList<Node> get_listeSucc(){
+	public ArrayList<Node> get_listeSuccNode(){
 		return liste_successeurs_;
 	}
 
-	public synchronized void set_listeSucc(ArrayList<Node> liste){
+	public void set_listeSuccNode(ArrayList<Node> liste){
 		liste_successeurs_ = liste;
 	}
 
-	public int get_sizeListeSucc(){
+	public int get_sizeListeSuccNode(){
 		return liste_successeurs_.size();
 	}
 
@@ -52,11 +47,5 @@ public class Node{
 		liste_successeurs_.set(index,node);
 	}
 
-	public boolean get_visite(){
-		return visite_;
-	}
-
-	public void set_visite(boolean etat){
-		visite_ = etat;
-	}
+	
 }
