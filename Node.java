@@ -1,3 +1,7 @@
+// Gérard Tio Nogueras - INFO2 - 000333083
+// Info-f-202
+// Projet Java: Parcours graph
+
 import java.io.*;
 import java.util.*;
 

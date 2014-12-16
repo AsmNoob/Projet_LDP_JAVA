@@ -1,3 +1,7 @@
+// Gérard Tio Nogueras - INFO2 - 000333083
+// Info-f-202
+// Projet Java: Parcours graph
+
 import java.io.*;
 import java.util.*;
 
@@ -99,14 +103,54 @@ public class main{
 		liste.add(node0);liste.add(node1);liste.add(node2);liste.add(node3);liste.add(node4);liste.add(node5);liste.add(node6);liste.add(node7);liste.add(node8);liste.add(node9);liste.add(node10);liste.add(node11);liste.add(node12);liste.add(node13);liste.add(node14);liste.add(node15);liste.add(node16);liste.add(node17);liste.add(node18);liste.add(node19);liste.add(node20);liste.add(node21);liste.add(node22);liste.add(node23);liste.add(node24);
 		Graph graph = new Graph(liste);
 		try{
-			ParcoursThread parcours = new ParcoursThread(graph,node0);
+			System.out.println(" Test Multiple avec le même noeud");
+			System.out.println("Parcours à partir du noeud 8, n°1\n");
+			ParcoursThread parcours = new ParcoursThread(graph,node8);
 			parcours.join();
-			//try {
-			  	Thread.sleep(3000); // TODO time has to become aleatory
-			/*} catch (InterruptedException e) {
-				System.err.println("Caught InterruptedException in run(): " + e.getMessage());
-			}*/
 			parcours.affichage_parcours();
+			graph.reinitialiser_graph();
+			parcours.set_marqueur(1);
+
+
+			System.out.println("\n//-----------------------------------------------------------------------------------//\n");
+
+			System.out.println("Parcours à partir du noeud 8, n°2\n");
+			parcours = new ParcoursThread(graph,node8);
+			parcours.join();
+			parcours.affichage_parcours();
+			graph.reinitialiser_graph();
+			parcours.set_marqueur(1);
+
+
+			System.out.println("\n//-----------------------------------------------------------------------------------//\n");
+
+			System.out.println("Parcours à partir du noeud 8, n°3\n");
+			parcours = new ParcoursThread(graph,node8);
+			parcours.join();
+			parcours.affichage_parcours();
+			graph.reinitialiser_graph();
+			parcours.set_marqueur(1);
+
+
+			System.out.println("\n//-----------------------------------------------------------------------------------//\n");
+
+			System.out.println("Parcours à partir du noeud 0\n");
+			parcours = new ParcoursThread(graph,node0);
+			parcours.join();
+			parcours.affichage_parcours();
+			graph.reinitialiser_graph();
+			parcours.set_marqueur(1);
+
+			System.out.println("\n//-----------------------------------------------------------------------------------//\n");
+
+			System.out.println("Parcours à partir du noeud 2\n");
+			parcours = new ParcoursThread(graph,node2);
+			parcours.join();
+			parcours.affichage_parcours();
+			graph.reinitialiser_graph();
+			parcours.set_marqueur(1);
+
+
 		}catch(InterruptedException e){
 			System.err.println("Caught InterruptedException in parcours: " + e.getMessage());
 		}

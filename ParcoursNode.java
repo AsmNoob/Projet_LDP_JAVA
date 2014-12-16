@@ -1,9 +1,13 @@
+// Gérard Tio Nogueras - INFO2 - 000333083
+// Info-f-202
+// Projet Java: Parcours graph
+
 import java.io.*;
 import java.util.*;
 
 public class ParcoursNode extends Node{
 	// Attributs
-	boolean visite_ = false;
+	private boolean visite_ = false;
 	private int ordre_traitement_ = 0;
 	private int nombre_examinations_ = 0;
 	private ArrayList<ParcoursNode> liste_;
@@ -22,15 +26,34 @@ public class ParcoursNode extends Node{
 		super();
 	}
 
-	public boolean get_visite(){
+
+	// Problématique:
+	// 2 threads: 1er prend la main sur visite_ (get) ensuite le 2ème
+	// le premier prend ensuite la main sur set()
+	// Donc alors que le premier veut set_verified 
+	// car si en même temps 2 threads testent la condition alors qu'elle aura changé juste après
+
+
+	//Solution 2 étapes en 1 pour résoudre le problème en utilisant les propriétés de la synchronisation
+	public synchronized boolean test(){
+		if(visite_ == true){
+			return true;
+		}else{
+			visite_ = true;
+			return false;
+		}
+	}
+
+	public synchronized boolean get_visite(){
 		return visite_;
 	}
 
+	// pour éviter des problème
 	public void set_visite(boolean etat){
 		visite_ = etat;
 	}
 
-	public int get_ordreTraitement(){
+	public synchronized int get_ordreTraitement(){
 		return ordre_traitement_;
 	}
 
@@ -42,7 +65,7 @@ public class ParcoursNode extends Node{
 		ordre_traitement_ = ordre;
 	}
 
-	public void set_nombreExaminations(int nombre){
+	public  synchronized void set_nombreExaminations(int nombre){
 		nombre_examinations_ = nombre;
 	}
 
